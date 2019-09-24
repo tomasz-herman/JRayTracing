@@ -34,7 +34,7 @@ public class Raytracer extends Canvas {
                 double y = (((double)j / height)) * 2 - 1;
                 Ray ray = camera.getRay(x, y);
                 Hit hit = world.raytrace(ray);
-                pixels[j * width + i] = (hit.color.getRed() << 16) + (hit.color.getGreen() << 8) + (hit.color.getBlue());
+                pixels[j * width + i] = hit.color.value();
             }
         }
     }

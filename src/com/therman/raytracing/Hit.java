@@ -1,6 +1,6 @@
 package com.therman.raytracing;
 
-import java.awt.*;
+import com.therman.math.Color;
 
 public class Hit {
     public double distance = Double.MAX_VALUE;

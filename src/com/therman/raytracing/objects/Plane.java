@@ -1,10 +1,9 @@
 package com.therman.raytracing.objects;
 
+import com.therman.math.Color;
 import com.therman.math.Ray;
 import com.therman.math.Vector3;
 import com.therman.raytracing.Hit;
-
-import java.awt.*;
 
 public class Plane implements Geometric{
 
