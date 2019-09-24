@@ -3,14 +3,14 @@ package com.therman.raytracing;
 import com.therman.math.Ray;
 import com.therman.math.Vector3;
 
-public class OrthographicCamera implements Camera {
+public class Orthographic implements Camera {
 
     private Vector3 position;
     private Vector3 direction;
     private double width;
     private double height;
 
-    public OrthographicCamera(Vector3 position, double yaw, double width, double height) {
+    public Orthographic(Vector3 position, double yaw, double width, double height) {
         this.position = position;
         this.direction = new Vector3(Math.sin(yaw), 0, Math.cos(yaw)).normalized();
         this.width = width;
