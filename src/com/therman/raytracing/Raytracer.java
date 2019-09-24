@@ -2,11 +2,12 @@ package com.therman.raytracing;
 
 import com.therman.math.Ray;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
-public class Raytracer extends Canvas {
+public class Raytracer extends JComponent {
 
     private final int width;
     private final int height;
@@ -15,7 +16,6 @@ public class Raytracer extends Canvas {
 
     public Raytracer(Window window) {
         window.add(this);
-        createBufferStrategy(3);
         width = window.getWidth();
         height = window.getHeight();
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
