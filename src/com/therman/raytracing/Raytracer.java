@@ -1,6 +1,7 @@
 package com.therman.raytracing;
 
 import com.therman.math.Ray;
+import com.therman.raytracing.camera.Camera;
 
 import javax.swing.*;
 import java.awt.*;

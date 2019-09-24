@@ -1,4 +1,4 @@
-package com.therman.raytracing;
+package com.therman.raytracing.camera;
 
 import com.therman.math.Matrix3;
 import com.therman.math.Ray;
@@ -20,6 +20,6 @@ public class Perspective implements Camera {
 
     @Override
     public Ray getRay(double x, double y) {
-        return new Ray(position, view.transform(new Vector3(x * aspect, y, -near)));
+        return new Ray(position, view.transform(new Vector3(x * aspect, -y, -near)));
     }
 }

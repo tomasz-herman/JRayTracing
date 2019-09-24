@@ -1,4 +1,4 @@
-package com.therman.raytracing;
+package com.therman.raytracing.camera;
 
 import com.therman.math.Ray;
 
