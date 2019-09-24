@@ -11,9 +11,8 @@ public class Matrix3 {
 
     public Matrix3 view(Vector3 position, Vector3 at, Vector3 up){
         Vector3 z = Vector3.sub(position, at).normalized();
-        Vector3 y = Vector3.mul(up.normalized(), -1);
-        Vector3 x = Vector3.cross(y, z);
-        y = Vector3.cross(x, z);
+        Vector3 x = Vector3.cross(z, up).normalized();
+        Vector3 y = Vector3.cross(z, x);
         m00 = x.x;
         m01 = y.x;
         m02 = z.x;

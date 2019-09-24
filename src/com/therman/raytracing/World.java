@@ -1,6 +1,7 @@
 package com.therman.raytracing;
 
 import com.therman.math.Ray;
+import com.therman.raytracing.objects.Geometric;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class World {
         objects.add(obj);
     }
 
-    public Hit raytrace(Ray ray){
+    Hit raytrace(Ray ray){
         Hit hit = new Hit();
         hit.color = color;
         for (Geometric obj : objects) {

@@ -1,6 +1,7 @@
-package com.therman.raytracing;
+package com.therman.raytracing.objects;
 
 import com.therman.math.Ray;
+import com.therman.raytracing.Hit;
 
 import java.awt.*;
 
