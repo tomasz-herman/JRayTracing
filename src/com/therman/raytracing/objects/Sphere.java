@@ -4,22 +4,23 @@ import com.therman.math.Color;
 import com.therman.math.Ray;
 import com.therman.math.Vector3;
 import com.therman.raytracing.Hit;
+import com.therman.raytracing.material.Material;
 
 public class Sphere implements Geometric {
 
-    private Color color;
+    private Material material;
     private Vector3 center;
     private double radius;
 
-    public Sphere(Vector3 center, double radius, Color color){
-        this.color = color;
+    public Sphere(Vector3 center, double radius, Material material){
+        this.material = material;
         this.center = center;
         this.radius = radius;
     }
 
     @Override
-    public Color color() {
-        return color;
+    public Material material() {
+        return material;
     }
 
     @Override
@@ -36,7 +37,10 @@ public class Sphere implements Geometric {
         if (t >= 0.00001) {
             if(hit.distance > t) {
                 hit.distance = t;
-                hit.color = color;
+                hit.object = this;
+                hit.hit = Vector3.add(Vector3.mul(ray.getDirection(), t), ray.getOrigin());
+                hit.normal = Vector3.sub(hit.hit, center).normalized();
+                hit.ray = ray;
             }
         }
         return hit;

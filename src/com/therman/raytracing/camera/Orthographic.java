@@ -1,6 +1,5 @@
 package com.therman.raytracing.camera;
 
-import com.therman.math.Matrix3;
 import com.therman.math.Ray;
 import com.therman.math.Vector3;
 

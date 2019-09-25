@@ -4,22 +4,23 @@ import com.therman.math.Color;
 import com.therman.math.Ray;
 import com.therman.math.Vector3;
 import com.therman.raytracing.Hit;
+import com.therman.raytracing.material.Material;
 
 public class Plane implements Geometric{
 
     private Vector3 point;
     private Vector3 normal;
-    private Color color;
+    private Material material;
 
-    public Plane(Vector3 point, Vector3 normal, Color color){
+    public Plane(Vector3 point, Vector3 normal, Material material){
         this.point = point;
         this.normal = normal;
-        this.color = color;
+        this.material = material;
     }
 
     @Override
-    public Color color() {
-        return color;
+    public Material material() {
+        return material;
     }
 
     @Override
@@ -28,7 +29,10 @@ public class Plane implements Geometric{
         if(t > 0.000001){
             if(hit.distance > t) {
                 hit.distance = t;
-                hit.color = color;
+                hit.object = this;
+                hit.normal = normal;
+                hit.hit = Vector3.add(Vector3.mul(ray.getDirection(), t), ray.getOrigin());
+                hit.ray = ray;
             }
         }
         return hit;

@@ -1,7 +1,10 @@
 package com.therman.raytracing;
 
+import com.therman.math.Color;
 import com.therman.math.Ray;
 import com.therman.raytracing.camera.Camera;
+import com.therman.raytracing.light.Light;
+import com.therman.raytracing.material.Material;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,9 +37,19 @@ public class Raytracer extends JComponent {
                 double x = (((double)i / width)) * 2 - 1;
                 double y = (((double)j / height)) * 2 - 1;
                 Ray ray = camera.getRay(x, y);
-                Hit hit = world.raytrace(ray);
-                pixels[j * width + i] = hit.color.value();
+                pixels[j * width + i] = shade(world, ray).value();
             }
         }
+    }
+
+    private Color shade(World world, Ray ray){
+        Hit hit = world.raytrace(ray);
+        if(hit.object == null) return world.getColor();
+        Color result = Color.BLACK;
+        Material material = hit.object.material();
+        for (Light light : world.getLights()) {
+            result = Color.add(result, material.Radiance(light, hit));
+        }
+        return result;
     }
 }

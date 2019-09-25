@@ -18,6 +18,30 @@ public class Color {
         rgb = new Vector3(clamp(red), clamp(green), clamp(blue));
     }
 
+    public Color(Vector3 rgb){
+        this.rgb = new Vector3(clamp(rgb.x), clamp(rgb.y), clamp(rgb.z));
+    }
+
+    public static Color add(Color a, Color b){
+        return new Color(Vector3.add(a.rgb, b.rgb));
+    }
+
+    public static Color sub(Color a, Color b){
+        return new Color(Vector3.sub(a.rgb, b.rgb));
+    }
+
+    public static Color mul(Color a, Color b){
+        return new Color(a.rgb.x * b.rgb.x, a.rgb.y * b.rgb.y, a.rgb.z * b.rgb.z);
+    }
+
+    public static Color mul(Color a, double v){
+        return new Color(Vector3.mul(a.rgb, v));
+    }
+
+    public static Color div(Color a, double v){
+        return new Color(Vector3.div(a.rgb, v));
+    }
+
     public int value(){
         return (int)(0xff * rgb.x) << 16 | (int)(0xff * rgb.y) << 8 | (int)(0xff * rgb.z);
     }

@@ -1,10 +1,10 @@
 package com.therman.raytracing.objects;
 
-import com.therman.math.Color;
 import com.therman.math.Ray;
 import com.therman.raytracing.Hit;
+import com.therman.raytracing.material.Material;
 
 public interface Geometric {
-    Color color();
+    Material material();
     Hit test(Ray ray, Hit hit);
 }
