@@ -23,13 +23,14 @@ public class World {
 
     Hit raytrace(Ray ray){
         Hit hit = new Hit();
+        hit.world = this;
         for (Geometric obj : objects) {
             obj.test(ray, hit);
         }
         return hit;
     }
 
-    boolean isObstacleBetween(Vector3 a, Vector3 b){
+    public boolean isObstacleBetween(Vector3 a, Vector3 b){
         Vector3 ab = Vector3.sub(b, a);
         double length = ab.length();
         Hit hit = new Hit();

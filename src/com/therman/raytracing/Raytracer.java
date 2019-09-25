@@ -46,11 +46,6 @@ public class Raytracer extends JComponent {
         Hit hit = world.raytrace(ray);
         if(hit.object == null) return world.getColor();
         Material material = hit.object.material();
-        Color result = material.ambient();
-        for (Light light : world.getLights()) {
-            if(!world.isObstacleBetween(hit.hit, light.position()))
-            result = Color.add(result, material.radiance(light, hit));
-        }
-        return result;
+        return material.shade(this, hit);
     }
 }

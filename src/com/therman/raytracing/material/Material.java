@@ -2,7 +2,7 @@ package com.therman.raytracing.material;
 
 import com.therman.math.Color;
 import com.therman.raytracing.Hit;
-import com.therman.raytracing.light.Light;
+import com.therman.raytracing.Raytracer;
 
 public interface Material {
 
@@ -14,6 +14,6 @@ public interface Material {
     Material SOLID_BLUE = new Diffuse(Color.BLUE, 0.2);
     Material SOLID_GRAY = new Diffuse(Color.GRAY, 0.2);
 
-    Color radiance(Light light, Hit hit);
+    Color shade(Raytracer rt, Hit hit);
     Color ambient();
 }

@@ -3,6 +3,7 @@ package com.therman.raytracing.material;
 import com.therman.math.Color;
 import com.therman.math.Vector3;
 import com.therman.raytracing.Hit;
+import com.therman.raytracing.Raytracer;
 import com.therman.raytracing.light.Light;
 
 public class Phong implements Material {
@@ -22,13 +23,16 @@ public class Phong implements Material {
     }
 
     @Override
-    public Color radiance(Light light, Hit hit) {
-        Vector3 direction = Vector3.sub(light.position(), hit.hit).normalized();
-        double diffuse = Vector3.dot(direction, hit.normal);
-        if(diffuse < 0) return Color.BLACK;
-        Color result = Color.mul(Color.mul(light.color(), color), diffuse * this.diffuse);
-        double specular = specular(direction, hit.normal, Vector3.reverse(hit.ray.getDirection()));
-        if(specular > 0) result = Color.add(result, Color.mul(color, this.specular * specular));
+    public Color shade(Raytracer rt, Hit hit) {
+        Color result = ambient();
+        for (Light light : hit.world.getLights()) {
+            Vector3 direction = Vector3.sub(light.position(), hit.hit).normalized();
+            double diffuse = Vector3.dot(direction, hit.normal);
+            if(diffuse < 0 || hit.world.isObstacleBetween(hit.hit, light.position())) continue;
+            result = Color.add(result, Color.mul(Color.mul(light.color(), color), diffuse * this.diffuse));
+            double specular = specular(direction, hit.normal, Vector3.reverse(hit.ray.getDirection()));
+            if(specular > 0) result = Color.add(result, Color.mul(color, this.specular * specular));
+        }
         return result;
     }
 

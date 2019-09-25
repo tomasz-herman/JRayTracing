@@ -2,7 +2,7 @@ package com.therman.raytracing.material;
 
 import com.therman.math.Color;
 import com.therman.raytracing.Hit;
-import com.therman.raytracing.light.Light;
+import com.therman.raytracing.Raytracer;
 
 public class Ambient implements Material {
 
@@ -13,7 +13,7 @@ public class Ambient implements Material {
     }
 
     @Override
-    public Color radiance(Light light, Hit hit) {
+    public Color shade(Raytracer rt, Hit hit) {
         return Color.BLACK;
     }
 
