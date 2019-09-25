@@ -13,7 +13,12 @@ public class Ambient implements Material {
     }
 
     @Override
-    public Color Radiance(Light light, Hit hit) {
+    public Color radiance(Light light, Hit hit) {
+        return Color.BLACK;
+    }
+
+    @Override
+    public Color ambient() {
         return color;
     }
 }

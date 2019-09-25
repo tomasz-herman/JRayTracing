@@ -5,5 +5,6 @@ import com.therman.raytracing.Hit;
 import com.therman.raytracing.light.Light;
 
 public interface Material {
-    Color Radiance(Light light, Hit hit);
+    Color radiance(Light light, Hit hit);
+    Color ambient();
 }
