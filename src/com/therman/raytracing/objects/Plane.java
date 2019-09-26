@@ -1,6 +1,7 @@
 package com.therman.raytracing.objects;
 
 import com.therman.math.Ray;
+import com.therman.math.Utils;
 import com.therman.math.Vector3;
 import com.therman.raytracing.Hit;
 import com.therman.raytracing.material.Material;
@@ -25,7 +26,7 @@ public class Plane implements Geometric{
     @Override
     public Hit test(Ray ray, Hit hit) {
         double t = Vector3.dot(Vector3.sub(point, ray.getOrigin()), normal) / Vector3.dot(ray.getDirection(), normal);
-        if(t > 0.000001){
+        if(t > Utils.EPSILON){
             if(hit.distance > t) {
                 hit.distance = t;
                 hit.object = this;

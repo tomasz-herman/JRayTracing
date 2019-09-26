@@ -2,8 +2,12 @@ package com.therman.raytracing;
 
 import com.therman.math.Color;
 import com.therman.math.Ray;
+import com.therman.math.Vector2;
 import com.therman.raytracing.camera.Camera;
 import com.therman.raytracing.material.Material;
+import com.therman.raytracing.sampling.Regular;
+import com.therman.raytracing.sampling.Sampler;
+import com.therman.raytracing.sampling.SquareDistributor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,14 +20,16 @@ public class Raytracer extends JComponent {
     private final int height;
     private final BufferedImage image;
     private final int[] pixels;
+    private final Sampler sampler;
     private final static int MAX_DEPTH = 5;
 
-    public Raytracer(Window window) {
+    public Raytracer(Window window, int antialiasing) {
         window.add(this);
         width = window.getWidth();
         height = window.getHeight();
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+        sampler = new Sampler(new Regular(), new SquareDistributor(), 1, antialiasing * antialiasing);
     }
 
     public void paint(Graphics g) {
@@ -34,10 +40,15 @@ public class Raytracer extends JComponent {
     public void raytrace(World world, Camera camera) {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++){
-                double x = (((double)i / width)) * 2 - 1;
-                double y = (((double)j / height)) * 2 - 1;
-                Ray ray = camera.getRay(x, y);
-                pixels[j * width + i] = shade(world, ray, 0).value();
+                Color result = Color.BLACK;
+                for (int k = 0; k < sampler.getCount(); k++) {
+                    Vector2 sample = sampler.getSample();
+                    double x = (((i + sample.x) / width)) * 2 - 1;
+                    double y = (((j + sample.y) / height)) * 2 - 1;
+                    Ray ray = camera.getRay(x, y);
+                    result = Color.add(result, Color.div(shade(world, ray, 0), sampler.getCount()));
+                }
+                pixels[j * width + i] = result.value();
             }
         }
     }

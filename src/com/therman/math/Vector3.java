@@ -1,26 +1,14 @@
 package com.therman.math;
 
 public class Vector3 {
-    double x;
-    double y;
-    double z;
+    public double x;
+    public double y;
+    public double z;
 
     public Vector3(double x, double y, double z) {
         this.x = x;
         this.y = y;
         this.z = z;
-    }
-
-    public double X(){
-        return x;
-    }
-
-    public double Y(){
-        return y;
-    }
-
-    public double Z(){
-        return z;
     }
 
     public static Vector3 add(Vector3 a, Vector3 b){

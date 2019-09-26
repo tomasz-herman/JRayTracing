@@ -17,7 +17,7 @@ import com.therman.raytracing.objects.Sphere;
 public class Main {
 
     public static void main(String[] args) {
-        Raytracer raytracer = new Raytracer(new Window("Raytracer", 1280, 720));
+        Raytracer raytracer = new Raytracer(new Window("Raytracer", 1280, 720), 4);
         World world = new World();
         world.add(new Sphere(new Vector3(-2.5, 0, 0), 2, Materials.GOLD));
         world.add(new Sphere(new Vector3(2.5, 0, 0), 2, Materials.COPPER));

@@ -1,6 +1,7 @@
 package com.therman.raytracing.objects;
 
 import com.therman.math.Ray;
+import com.therman.math.Utils;
 import com.therman.math.Vector3;
 import com.therman.raytracing.Hit;
 import com.therman.raytracing.material.Material;
@@ -32,8 +33,8 @@ public class Sphere implements Geometric {
         if (delta < 0) return hit;
         double deltaSq = Math.sqrt(delta);
         t = (-b - deltaSq) / 2;
-        if (t < 0.00001) t = (-b + deltaSq) / 2;
-        if (t >= 0.00001) {
+        if (t < Utils.EPSILON) t = (-b + deltaSq) / 2;
+        if (t >= Utils.EPSILON) {
             if(hit.distance > t) {
                 hit.distance = t;
                 hit.object = this;
