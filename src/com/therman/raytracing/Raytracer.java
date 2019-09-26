@@ -3,7 +3,6 @@ package com.therman.raytracing;
 import com.therman.math.Color;
 import com.therman.math.Ray;
 import com.therman.raytracing.camera.Camera;
-import com.therman.raytracing.light.Light;
 import com.therman.raytracing.material.Material;
 
 import javax.swing.*;
@@ -17,6 +16,7 @@ public class Raytracer extends JComponent {
     private final int height;
     private final BufferedImage image;
     private final int[] pixels;
+    private final static int MAX_DEPTH = 5;
 
     public Raytracer(Window window) {
         window.add(this);
@@ -37,13 +37,15 @@ public class Raytracer extends JComponent {
                 double x = (((double)i / width)) * 2 - 1;
                 double y = (((double)j / height)) * 2 - 1;
                 Ray ray = camera.getRay(x, y);
-                pixels[j * width + i] = shade(world, ray).value();
+                pixels[j * width + i] = shade(world, ray, 0).value();
             }
         }
     }
 
-    private Color shade(World world, Ray ray){
+    public Color shade(World world, Ray ray, int depth){
+        if(depth > MAX_DEPTH) return Color.BLACK;
         Hit hit = world.raytrace(ray);
+        hit.depth = depth + 1;
         if(hit.object == null) return world.getColor();
         Material material = hit.object.material();
         return material.shade(this, hit);

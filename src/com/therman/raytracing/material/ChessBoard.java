@@ -18,8 +18,8 @@ public class ChessBoard extends Material {
 
     @Override
     public Color shade(Raytracer rt, Hit hit) {
-        int x = (int)Math.round(hit.hit.X() * scale);
-        int y = (int)Math.round(hit.hit.Z() * scale);
+        int x = (int)Math.round(hit.point.X() * scale);
+        int y = (int)Math.round(hit.point.Z() * scale);
         if(((x ^ y) & 1) == 0){
             return a.shade(rt, hit);
         } else return b.shade(rt, hit);

@@ -22,7 +22,7 @@ public class Main {
         world.add(new Sphere(new Vector3(-2.5, 0, 0), 2, Materials.GOLD));
         world.add(new Sphere(new Vector3(2.5, 0, 0), 2, Materials.COPPER));
         world.add(new Sphere(new Vector3(0, 0, 2.5), 2, Materials.STEEL));
-        world.add(new Plane(new Vector3(0, -2, 0), new Vector3(0,1,0), new ChessBoard(Materials.STEEL, Materials.SOLID_BLACK, 4)));
+        world.add(new Plane(new Vector3(0, -2, 0), new Vector3(0,1,0), new ChessBoard(Materials.MIRROR, Materials.BLACK_MIRROR, 4)));
         world.add(new Light(new Vector3(0, 10, 0), Color.WHITE));
         Camera camera = new Perspective(new Vector3(0, 2, -4), new Vector3(0, 0, 0), new Vector3(0, 1, 0), 1, 16.0 / 9.0);
         raytracer.raytrace(world, camera);

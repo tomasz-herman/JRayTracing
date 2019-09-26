@@ -10,7 +10,7 @@ public class Color {
     public static final Color RED = new Color(0.75, 0, 0);
     public static final Color GREEN = new Color(0, 0.75, 0);
     public static final Color BLUE = new Color(0, 0, 0.75);
-    public static final Color SKY = new Color(0.5, 0.8, 0.9);
+    public static final Color SKY = new Color(0.8, 0.9, 1);
 
     private Vector3 rgb;
 

@@ -1,6 +1,5 @@
 package com.therman.raytracing.objects;
 
-import com.therman.math.Color;
 import com.therman.math.Ray;
 import com.therman.math.Vector3;
 import com.therman.raytracing.Hit;
@@ -31,7 +30,7 @@ public class Plane implements Geometric{
                 hit.distance = t;
                 hit.object = this;
                 hit.normal = normal;
-                hit.hit = Vector3.add(Vector3.mul(ray.getDirection(), t), ray.getOrigin());
+                hit.point = Vector3.add(Vector3.mul(ray.getDirection(), t), ray.getOrigin());
                 hit.ray = ray;
             }
         }

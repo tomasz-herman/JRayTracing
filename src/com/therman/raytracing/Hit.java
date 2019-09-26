@@ -9,6 +9,7 @@ public class Hit {
     public Geometric object;
     public World world;
     public Vector3 normal;
-    public Vector3 hit;
+    public Vector3 point;
     public Ray ray;
+    public int depth;
 }
