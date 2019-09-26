@@ -8,18 +8,18 @@ public class Perspective implements Camera {
 
     private Vector3 position;
     private Matrix3 view;
-    private double near;
+    private double scale;
     private double aspect;
 
-    public Perspective(Vector3 position, Vector3 at, Vector3 up, double near, double aspect) {
+    public Perspective(Vector3 position, Vector3 at, Vector3 up, double scale, double aspect) {
         this.position = position;
         this.view = new Matrix3().view(position, at, up);
-        this.near = near;
+        this.scale = 1 / scale;
         this.aspect = aspect;
     }
 
     @Override
     public Ray getRay(double x, double y) {
-        return new Ray(position, view.transform(new Vector3(x * aspect, -y, -near)));
+        return new Ray(position, view.transform(new Vector3(x * aspect * scale, -y * scale, -1)));
     }
 }
