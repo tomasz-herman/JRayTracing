@@ -4,16 +4,17 @@ import com.therman.math.Color;
 import com.therman.raytracing.Hit;
 import com.therman.raytracing.Raytracer;
 
-public class Ambient extends Material {
+public class Reflective extends MaterialDecorator {
 
     private Color color;
 
-    public Ambient(Color color){
+    public Reflective(Material material, Color color) {
+        super(material);
         this.color = color;
     }
 
     @Override
     public Color shade(Raytracer rt, Hit hit) {
-        return color;
+        throw new UnsupportedOperationException();
     }
 }

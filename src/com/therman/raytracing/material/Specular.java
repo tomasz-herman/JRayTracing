@@ -6,32 +6,24 @@ import com.therman.raytracing.Hit;
 import com.therman.raytracing.Raytracer;
 import com.therman.raytracing.light.Light;
 
-public class Phong implements Material {
+public class Specular extends MaterialDecorator {
 
     private Color color;
-    private double diffuse;
-    private double specular;
     private double exp;
-    private double ambient;
 
-    public Phong(Color color, double diffuse, double specular, double exp, double ambient) {
+    public Specular(Material material, Color color, double exp) {
+        super(material);
         this.color = color;
-        this.diffuse = diffuse;
-        this.specular = specular;
         this.exp = exp;
-        this.ambient = ambient;
     }
 
     @Override
     public Color shade(Raytracer rt, Hit hit) {
-        Color result = ambient();
+        Color result = material.shade(rt, hit);
         for (Light light : hit.world.getLights()) {
             Vector3 direction = Vector3.sub(light.position(), hit.hit).normalized();
-            double diffuse = Vector3.dot(direction, hit.normal);
-            if(diffuse < 0 || hit.world.isObstacleBetween(hit.hit, light.position())) continue;
-            result = Color.add(result, Color.mul(Color.mul(light.color(), color), diffuse * this.diffuse));
             double specular = specular(direction, hit.normal, Vector3.reverse(hit.ray.getDirection()));
-            if(specular > 0) result = Color.add(result, Color.mul(color, this.specular * specular));
+            if(specular > 0) result = Color.add(result, Color.mul(color, specular));
         }
         return result;
     }
@@ -41,10 +33,5 @@ public class Phong implements Material {
         double cos = Vector3.dot(reflected, toCamera);
         if(cos < 0) return 0;
         return Math.pow(cos, exp);
-    }
-
-    @Override
-    public Color ambient() {
-        return Color.mul(color, ambient);
     }
 }
