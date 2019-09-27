@@ -47,7 +47,7 @@ public class Color {
     }
 
     public int value(){
-        return (int)(0xff * rgb.x) << 16 | (int)(0xff * rgb.y) << 8 | (int)(0xff * rgb.z);
+        return (int)(0xff * rgb.x + 0.5) << 16 | (int)(0xff * rgb.y + 0.5) << 8 | (int)(0xff * rgb.z + 0.5);
     }
 
     private double clamp(double val){

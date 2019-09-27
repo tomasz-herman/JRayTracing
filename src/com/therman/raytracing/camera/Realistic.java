@@ -23,7 +23,7 @@ public class Realistic implements Camera {
         this.aspect = aspect;
         this.lens = lens;
         this.focal = focal;
-        this.sampler = new Sampler(new Randomized(), new DiskDistributor(), 8, 16);
+        this.sampler = new Sampler(new Randomized(), new DiskDistributor(), 8, 64);
     }
 
 

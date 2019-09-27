@@ -19,10 +19,15 @@ public class Diffuse extends MaterialDecorator {
     public Color shade(Raytracer rt, Hit hit) {
         Color result = material.shade(rt, hit);
         for (Light light : hit.world.getLights()) {
-            Vector3 direction = Vector3.sub(light.position(), hit.point).normalized();
-            double diffuse = Vector3.dot(direction, hit.normal);
-            if(diffuse < 0 || hit.world.isObstacleBetween(hit.point, light.position())) continue;
-            result = Color.add(result, Color.mul(light.color(), Color.mul(color, diffuse)));
+            Color diffuseColor = Color.BLACK;
+            for (int i = 0; i < light.getSamples(); i++) {
+                Vector3 lightPos = light.position();
+                Vector3 direction = Vector3.sub(lightPos, hit.point).normalized();
+                double diffuse = Vector3.dot(direction, hit.normal);
+                if(diffuse < 0 || hit.world.isObstacleBetween(hit.point, lightPos)) continue;
+                diffuseColor = Color.add(diffuseColor, Color.mul(light.color(), Color.mul(color, diffuse/light.getSamples())));
+            }
+            result = Color.add(result, diffuseColor);
         }
         return result;
     }

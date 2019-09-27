@@ -13,6 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.text.DecimalFormat;
 
 public class Raytracer extends JComponent {
 
@@ -38,6 +39,7 @@ public class Raytracer extends JComponent {
     }
 
     public void raytrace(World world, Camera camera) {
+        DecimalFormat format = new DecimalFormat("0.00");
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++){
                 Color result = Color.BLACK;
@@ -50,6 +52,8 @@ public class Raytracer extends JComponent {
                 }
                 pixels[j * width + i] = result.value();
             }
+            repaint(i, 0, 1, height);
+            System.out.println(format.format((double)(i+1) / width * 100) + "%");
         }
     }
 

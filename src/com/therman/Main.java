@@ -21,12 +21,13 @@ public class Main {
         Raytracer raytracer = new Raytracer(new Window("Raytracer", 1280, 720), 4);
         World world = new World();
         world.add(new Sphere(new Vector3(-2.5, 0, 0), 2, Materials.GOLD));
-        world.add(new Sphere(new Vector3(2.5, 0, 0), 2, Materials.COPPER));
-        world.add(new Sphere(new Vector3(0, 0, 2.5), 2, Materials.STEEL));
+        world.add(new Sphere(new Vector3(2.5, 0, 0), 2, Materials.STEEL));
+        world.add(new Sphere(new Vector3(0, 0, 2.5), 2, Materials.COPPER));
         world.add(new Plane(new Vector3(0, -2, 0), new Vector3(0,1,0), new ChessBoard(Materials.WHITE_CERAMIC, Materials.BLACK_CERAMIC, 4)));
-        world.add(new Light(new Vector3(0, 1e9, 0), Color.WHITE));
-        Camera camera = new Perspective(new Vector3(0, 2, -4), new Vector3(0, 0, 0), new Vector3(0, 1, 0), 1, 16.0 / 9.0);
+        world.add(new Light(new Vector3(0, 10, 0), Color.WHITE, 4, 64));
+        Camera camera = new Realistic(new Vector3(0, 2, -4), new Vector3(0, 0, 0), new Vector3(0, 1, 0), 1, 16.0 / 9.0, 0.005, 5);
         raytracer.raytrace(world, camera);
         raytracer.repaint();
+        System.out.println("done");
     }
 }
