@@ -42,6 +42,10 @@ public class Color {
         return new Color(Vector3.div(a.rgb, v));
     }
 
+    public static Color mix(Color a, Color b, double v){
+        return new Color(a.rgb.x * v + b.rgb.x * (1-v), a.rgb.y * v + b.rgb.y * (1-v), a.rgb.z * v + b.rgb.z * (1-v));
+    }
+
     public int value(){
         return (int)(0xff * rgb.x) << 16 | (int)(0xff * rgb.y) << 8 | (int)(0xff * rgb.z);
     }

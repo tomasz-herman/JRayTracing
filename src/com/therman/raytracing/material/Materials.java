@@ -23,4 +23,21 @@ public class Materials {
     public final static Material SOLID_BLACK = new Ambient(Color.BLACK);
     public final static Material MIRROR = new Specular(new Reflective(new Ambient(Color.BLACK), Color.WHITE), Color.WHITE, 10);
     public final static Material BLACK_MIRROR = new Specular(new Reflective(new Ambient(Color.BLACK), Color.mul(Color.WHITE, 0.15)), Color.WHITE, 100);
+    public final static Material BLACK_CERAMIC;
+    public final static Material WHITE_CERAMIC;
+
+    static {
+        Material black_ceramic = new Ambient(Color.BLACK);
+        black_ceramic = new Diffuse(black_ceramic, Color.mul(Color.WHITE, 0.1));
+        black_ceramic = new Specular(black_ceramic, Color.WHITE, 100);
+        black_ceramic = new Reflective(black_ceramic, Color.mul(Color.WHITE, 0.1));
+        BLACK_CERAMIC = black_ceramic;
+
+        Material white_ceramic = new Ambient(Color.DARK_GRAY);
+        white_ceramic = new Diffuse(white_ceramic, Color.LIGHT_GRAY);
+        white_ceramic = new Specular(white_ceramic, Color.WHITE, 100);
+        white_ceramic = new Reflective(white_ceramic, Color.mul(Color.WHITE, 0.1));
+        WHITE_CERAMIC = white_ceramic;
+    }
+
 }

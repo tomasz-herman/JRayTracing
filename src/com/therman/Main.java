@@ -7,6 +7,7 @@ import com.therman.raytracing.Window;
 import com.therman.raytracing.World;
 import com.therman.raytracing.camera.Camera;
 import com.therman.raytracing.camera.Perspective;
+import com.therman.raytracing.camera.Realistic;
 import com.therman.raytracing.light.Light;
 import com.therman.raytracing.material.ChessBoard;
 import com.therman.raytracing.material.Material;
@@ -22,8 +23,8 @@ public class Main {
         world.add(new Sphere(new Vector3(-2.5, 0, 0), 2, Materials.GOLD));
         world.add(new Sphere(new Vector3(2.5, 0, 0), 2, Materials.COPPER));
         world.add(new Sphere(new Vector3(0, 0, 2.5), 2, Materials.STEEL));
-        world.add(new Plane(new Vector3(0, -2, 0), new Vector3(0,1,0), new ChessBoard(Materials.MIRROR, Materials.BLACK_MIRROR, 4)));
-        world.add(new Light(new Vector3(0, 10, 0), Color.WHITE));
+        world.add(new Plane(new Vector3(0, -2, 0), new Vector3(0,1,0), new ChessBoard(Materials.WHITE_CERAMIC, Materials.BLACK_CERAMIC, 4)));
+        world.add(new Light(new Vector3(0, 1e9, 0), Color.WHITE));
         Camera camera = new Perspective(new Vector3(0, 2, -4), new Vector3(0, 0, 0), new Vector3(0, 1, 0), 1, 16.0 / 9.0);
         raytracer.raytrace(world, camera);
         raytracer.repaint();
