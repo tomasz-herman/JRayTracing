@@ -22,4 +22,9 @@ public class Perspective implements Camera {
     public Ray getRay(double x, double y) {
         return new Ray(position, view.transform(new Vector3(x * aspect * scale, -y * scale, -1)));
     }
+
+    @Override
+    public int samples() {
+        return 1;
+    }
 }

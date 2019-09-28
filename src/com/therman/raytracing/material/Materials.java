@@ -11,15 +11,17 @@ public class Materials {
     private final static Color gold = new Color(1, 0.75, 0.15);
     public final static Material GOLD = new Reflective(new Specular(new Diffuse(new Ambient(Color.mul(gold, 0.25)), gold), gold, 20), Color.mul(gold, 0.15));
 
-    public final static Material SOLID_RED = new Diffuse(new Ambient(Color.mul(Color.RED, 0.25)), Color.RED);
-    public final static Material SOLID_GREEN = new Diffuse(new Ambient(Color.mul(Color.GREEN, 0.25)), Color.GREEN);
-    public final static Material SOLID_BLUE = new Diffuse(new Ambient(Color.mul(Color.BLUE, 0.25)), Color.BLUE);
-    public final static Material SOLID_GRAY = new Diffuse(new Ambient(Color.mul(Color.GRAY, 0.25)), Color.GRAY);
+    public final static Material SOLID_RED = new Diffuse(new Ambient(Color.mul(Color.RED, 0.1)), Color.RED);
+    public final static Material SOLID_GREEN = new Diffuse(new Ambient(Color.mul(Color.GREEN, 0.1)), Color.GREEN);
+    public final static Material SOLID_BLUE = new Diffuse(new Ambient(Color.mul(Color.BLUE, 0.1)), Color.BLUE);
+    public final static Material SOLID_GRAY = new Diffuse(new Ambient(Color.mul(Color.GRAY, 0.1)), Color.GRAY);
+    public final static Material SOLID_WHITE = new Diffuse(new Ambient(Color.mul(Color.WHITE, 0.1)), Color.WHITE);
 
-    public final static Material SOLID_DARK_RED = new Diffuse(new Ambient(Color.mul(Color.RED, 0.15)), Color.mul(Color.RED, 0.65));
-    public final static Material SOLID_DARK_GREEN = new Diffuse(new Ambient(Color.mul(Color.GREEN, 0.15)), Color.mul(Color.GREEN, 0.65));
-    public final static Material SOLID_DARK_BLUE = new Diffuse(new Ambient(Color.mul(Color.BLUE, 0.15)), Color.mul(Color.BLUE, 0.65));
-    public final static Material SOLID_DARK_GRAY = new Diffuse(new Ambient(Color.mul(Color.GRAY, 0.15)), Color.mul(Color.GRAY, 0.65));
+
+    public final static Material SOLID_DARK_RED = new Diffuse(new Ambient(Color.mul(Color.RED, 0.05)), Color.mul(Color.RED, 0.65));
+    public final static Material SOLID_DARK_GREEN = new Diffuse(new Ambient(Color.mul(Color.GREEN, 0.05)), Color.mul(Color.GREEN, 0.65));
+    public final static Material SOLID_DARK_BLUE = new Diffuse(new Ambient(Color.mul(Color.BLUE, 0.05)), Color.mul(Color.BLUE, 0.65));
+    public final static Material SOLID_DARK_GRAY = new Diffuse(new Ambient(Color.mul(Color.GRAY, 0.05)), Color.mul(Color.GRAY, 0.65));
     public final static Material SOLID_BLACK = new Ambient(Color.BLACK);
     public final static Material MIRROR = new Specular(new Reflective(new Ambient(Color.BLACK), Color.WHITE), Color.WHITE, 10);
     public final static Material BLACK_MIRROR = new Specular(new Reflective(new Ambient(Color.BLACK), Color.mul(Color.WHITE, 0.15)), Color.WHITE, 100);

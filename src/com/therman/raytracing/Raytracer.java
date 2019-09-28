@@ -47,8 +47,10 @@ public class Raytracer extends JComponent {
                     Vector2 sample = sampler.getSample();
                     double x = (((i + sample.x) / width)) * 2 - 1;
                     double y = (((j + sample.y) / height)) * 2 - 1;
-                    Ray ray = camera.getRay(x, y);
-                    result = Color.add(result, Color.div(shade(world, ray, 0), sampler.getCount()));
+                    for (int l = 0; l < camera.samples(); l++) {
+                        Ray ray = camera.getRay(x, y);
+                        result = Color.add(result, Color.div(shade(world, ray, 0), sampler.getCount() * camera.samples()));
+                    }
                 }
                 pixels[j * width + i] = result.value();
             }
