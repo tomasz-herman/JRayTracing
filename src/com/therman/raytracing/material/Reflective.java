@@ -24,4 +24,14 @@ public class Reflective extends MaterialDecorator {
         result = Color.add(result, Color.mul(rt.shade(hit.world, reflected, hit.depth), color));
         return result;
     }
+
+    @Override
+    public Color fastshade(Raytracer raytracer, Hit hit) {
+        Vector3 toCamera = Vector3.reverse(hit.ray.getDirection());
+        Vector3 reflection = Vector3.reflect(toCamera, hit.normal);
+        Ray reflected = new Ray(hit.point, reflection);
+        Color result = material.fastshade(raytracer, hit);
+        result = Color.add(result, Color.mul(raytracer.fastshade(hit.world, reflected, hit.depth), color));
+        return result;
+    }
 }

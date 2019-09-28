@@ -23,9 +23,9 @@ public class Main {
         world.add(new Sphere(new Vector3(-4, 0, 0), 2, Materials.GOLD));
         world.add(new Sphere(new Vector3(4, 0, 0), 2, Materials.STEEL));
         world.add(new Sphere(new Vector3(0, 0, 2.5), 2, Materials.COPPER));
-        world.add(new Plane(new Vector3(0, -2, 0), new Vector3(0,1,0), new ChessBoard(Materials.SOLID_DARK_GRAY, Materials.SOLID_WHITE, 4)));
-        world.add(new Light(new Vector3(8000, 4000, 8000), Color.WHITE, 4000, 160));
-        Camera camera = new Realistic(new Vector3(0, 2, -6), new Vector3(0, 0, 0), new Vector3(0, 1, 0), 1, 16.0 / 9.0, 16, 0.1, 10);
+        world.add(new Plane(new Vector3(0, -2, 0), new Vector3(0,1,0), new ChessBoard(Materials.BLACK_MIRROR, Materials.MIRROR, 4)));
+        world.add(new Light(new Vector3(8000, 4000, 8000), Color.WHITE, 400, 16));
+        Camera camera = new Realistic(new Vector3(0, 2, -6), new Vector3(0, 0, 0), new Vector3(0, 1, 0), 1, 16.0 / 9.0, 16, 0.1, 8);
         raytracer.raytrace(world, camera);
         raytracer.repaint();
         System.out.println("done");

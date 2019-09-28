@@ -24,4 +24,13 @@ public class ChessBoard extends Material {
             return a.shade(rt, hit);
         } else return b.shade(rt, hit);
     }
+
+    @Override
+    public Color fastshade(Raytracer raytracer, Hit hit) {
+        int x = (int)Math.round(hit.point.x * scale);
+        int y = (int)Math.round(hit.point.z * scale);
+        if(((x ^ y) & 1) == 0){
+            return a.fastshade(raytracer, hit);
+        } else return b.fastshade(raytracer, hit);
+    }
 }

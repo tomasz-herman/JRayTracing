@@ -23,11 +23,24 @@ public class Specular extends MaterialDecorator {
         for (Light light : hit.world.getLights()) {
             Color specularColor = Color.BLACK;
             for (int i = 0; i < light.getSamples(); i++) {
-                Vector3 direction = Vector3.sub(light.position(), hit.point).normalized();
+                Vector3 direction = Vector3.sub(light.sample(), hit.point).normalized();
                 double specular = specular(direction, hit.normal, Vector3.reverse(hit.ray.getDirection()));
                 if (specular > 0) specularColor = Color.add(specularColor, Color.mul(color, specular/light.getSamples()));
             }
             result = Color.add(result, specularColor);
+        }
+        return result;
+    }
+
+    @Override
+    public Color fastshade(Raytracer raytracer, Hit hit) {
+        Color result = material.fastshade(raytracer, hit);
+        for (Light light : hit.world.getLights()) {
+            Vector3 lightPos = light.position();
+            Vector3 direction = Vector3.sub(light.position(), hit.point).normalized();
+            double specular = specular(direction, hit.normal, Vector3.reverse(hit.ray.getDirection()));
+            if (specular < 0 || hit.world.isObstacleBetween(hit.point, lightPos)) continue;
+            result = Color.add(result, Color.mul(color, specular));
         }
         return result;
     }

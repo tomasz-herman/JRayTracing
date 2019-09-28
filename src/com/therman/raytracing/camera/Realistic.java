@@ -31,7 +31,7 @@ public class Realistic implements Camera {
 
     @Override
     public Ray getRay(double x, double y) {
-        Ray original = new Ray(position, view.transform(new Vector3(x * aspect * scale, -y * scale, -1)));
+        Ray original = getPreviewRay(x, y);
         Vector3 aimed = Vector3.add(position, Vector3.mul(original.getDirection(), focal));
         Vector2 sample = sampler.getSample();
         double lensX = sample.x * lens;
@@ -44,5 +44,10 @@ public class Realistic implements Camera {
     @Override
     public int samples() {
         return samples;
+    }
+
+    @Override
+    public Ray getPreviewRay(double x, double y) {
+        return new Ray(position, view.transform(new Vector3(x * aspect * scale, -y * scale, -1)));
     }
 }

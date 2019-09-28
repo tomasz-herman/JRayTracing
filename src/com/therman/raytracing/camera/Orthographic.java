@@ -30,4 +30,9 @@ public class Orthographic implements Camera {
     public int samples() {
         return 1;
     }
+
+    @Override
+    public Ray getPreviewRay(double x, double y) {
+        return getRay(x, y);
+    }
 }

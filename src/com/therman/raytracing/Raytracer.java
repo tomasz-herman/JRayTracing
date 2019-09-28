@@ -13,6 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.sql.SQLOutput;
 import java.text.DecimalFormat;
 
 public class Raytracer extends JComponent {
@@ -23,6 +24,7 @@ public class Raytracer extends JComponent {
     private final int[] pixels;
     private final Sampler sampler;
     private final static int MAX_DEPTH = 5;
+    private final static int MAX_PREVIEW_DEPTH = 1;
 
     public Raytracer(Window window, int antialiasing) {
         window.add(this);
@@ -39,6 +41,8 @@ public class Raytracer extends JComponent {
     }
 
     public void raytrace(World world, Camera camera) {
+        prewiev(world, camera);
+        System.out.println("Rendering...");
         DecimalFormat format = new DecimalFormat("0.00");
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++){
@@ -57,6 +61,25 @@ public class Raytracer extends JComponent {
             repaint(i, 0, 1, height);
             System.out.println(format.format((double)(i+1) / width * 100) + "%");
         }
+        System.out.println("Rendering done...");
+    }
+
+    private void prewiev(World world, Camera camera){
+        System.out.println("Rendering preview...");
+        DecimalFormat format = new DecimalFormat("0.00");
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++){
+                Color result = Color.BLACK;
+                double x = ((double)i  / width) * 2 - 1;
+                double y = ((double)j / height) * 2 - 1;
+                Ray ray = camera.getPreviewRay(x, y);
+                result = Color.add(result, fastshade(world, ray, 0));
+                pixels[j * width + i] = result.value();
+            }
+            repaint(i, 0, 1, height);
+            System.out.println(format.format((double)(i+1) / width * 100) + "%");
+        }
+        System.out.println("Preview rendering done...");
     }
 
     public Color shade(World world, Ray ray, int depth){
@@ -66,5 +89,14 @@ public class Raytracer extends JComponent {
         if(hit.object == null) return world.getColor();
         Material material = hit.object.material();
         return material.shade(this, hit);
+    }
+
+    public Color fastshade(World world, Ray ray, int depth){
+        if(depth > MAX_PREVIEW_DEPTH) return Color.BLACK;
+        Hit hit = world.raytrace(ray);
+        hit.depth = depth + 1;
+        if(hit.object == null) return world.getColor();
+        Material material = hit.object.material();
+        return material.fastshade(this, hit);
     }
 }

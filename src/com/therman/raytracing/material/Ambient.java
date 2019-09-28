@@ -16,4 +16,9 @@ public class Ambient extends Material {
     public Color shade(Raytracer rt, Hit hit) {
         return color;
     }
+
+    @Override
+    public Color fastshade(Raytracer raytracer, Hit hit) {
+        return color;
+    }
 }

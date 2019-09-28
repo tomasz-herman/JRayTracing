@@ -11,6 +11,10 @@ public class Color {
     public static final Color GREEN = new Color(0, 0.75, 0);
     public static final Color BLUE = new Color(0, 0, 0.75);
     public static final Color SKY = new Color(0.8, 0.9, 1);
+    public final static Color COPPER = new Color(1.0, 0.25, 0.05);
+    public final static Color STEEL = new Color(0.6, 0.65, 0.75);
+    public final static Color GOLD = new Color(1, 0.75, 0.15);
+
 
     private Vector3 rgb;
 

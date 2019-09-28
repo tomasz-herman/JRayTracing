@@ -32,11 +32,15 @@ public class Light {
         return color;
     }
 
-    public Vector3 position() {
-        return radius == 0 ? position : sample();
+    public Vector3 position(){
+        return position;
     }
 
-    private Vector3 sample(){
+    public Vector3 sample() {
+        return radius == 0 ? position : getSample();
+    }
+
+    private Vector3 getSample(){
         Vector2 sample = sampler.getSample();
         double z = 2 * sample.x - 1;
         double t = 2 * sample.y * Math.PI;
