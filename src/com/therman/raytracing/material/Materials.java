@@ -25,7 +25,13 @@ public class Materials {
     public final static Material BLACK_CERAMIC;
     public final static Material WHITE_CERAMIC;
 
+    public final static Material LIGHT_BULB;
+
     static {
+        Material light_bulb = new Ambient(Color.BLACK);
+        light_bulb = new Emissive(light_bulb, Color.WHITE);
+        LIGHT_BULB = light_bulb;
+
         Material mirror = new Ambient(Color.BLACK);
         mirror = new Reflective(mirror, Color.WHITE);
         mirror = new Specular(mirror, Color.WHITE, 10);

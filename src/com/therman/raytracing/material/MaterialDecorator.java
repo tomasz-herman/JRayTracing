@@ -14,4 +14,8 @@ public abstract class MaterialDecorator extends Material {
 
     @Override
     public abstract Color shade(Raytracer rt, Hit hit);
+
+    public Color ambient(Hit hit){
+        return material.ambient(hit);
+    }
 }

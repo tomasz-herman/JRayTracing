@@ -4,26 +4,22 @@ import com.therman.math.Color;
 import com.therman.raytracing.Hit;
 import com.therman.raytracing.Raytracer;
 
-public class Ambient extends Material {
+public class Emissive extends MaterialDecorator {
 
     private Color color;
 
-    public Ambient(Color color){
+    public Emissive(Material material, Color color){
+        super(material);
         this.color = color;
     }
 
     @Override
     public Color shade(Raytracer rt, Hit hit) {
-        return Color.BLACK;
+        return color;
     }
 
     @Override
     public Color fastshade(Raytracer raytracer, Hit hit) {
-        return Color.BLACK;
-    }
-
-    @Override
-    public Color ambient(Hit hit) {
         return color;
     }
 }

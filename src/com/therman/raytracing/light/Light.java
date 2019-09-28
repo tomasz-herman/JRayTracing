@@ -3,7 +3,6 @@ package com.therman.raytracing.light;
 import com.therman.math.Color;
 import com.therman.math.Vector2;
 import com.therman.math.Vector3;
-import com.therman.raytracing.sampling.Jittered;
 import com.therman.raytracing.sampling.Randomized;
 import com.therman.raytracing.sampling.Sampler;
 import com.therman.raytracing.sampling.SquareDistributor;

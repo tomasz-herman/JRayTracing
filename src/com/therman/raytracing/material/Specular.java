@@ -23,9 +23,11 @@ public class Specular extends MaterialDecorator {
         for (Light light : hit.world.getLights()) {
             Color specularColor = Color.BLACK;
             for (int i = 0; i < light.getSamples(); i++) {
-                Vector3 direction = Vector3.sub(light.sample(), hit.point).normalized();
+                Vector3 lightPos = light.position();
+                Vector3 direction = Vector3.sub(lightPos, hit.point).normalized();
                 double specular = specular(direction, hit.normal, Vector3.reverse(hit.ray.getDirection()));
-                if (specular > 0) specularColor = Color.add(specularColor, Color.mul(color, specular/light.getSamples()));
+                if (specular < 0 || hit.world.isObstacleBetween(hit.point, lightPos)) continue;
+                specularColor = Color.add(specularColor, Color.mul(color, specular/light.getSamples()));
             }
             result = Color.add(result, specularColor);
         }

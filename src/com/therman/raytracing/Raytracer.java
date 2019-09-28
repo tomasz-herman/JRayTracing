@@ -13,7 +13,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.sql.SQLOutput;
 import java.text.DecimalFormat;
 
 public class Raytracer extends JComponent {
@@ -87,8 +86,9 @@ public class Raytracer extends JComponent {
         Hit hit = world.raytrace(ray);
         hit.depth = depth + 1;
         if(hit.object == null) return world.getColor();
+        Color result = Color.mul(hit.object.material().ambient(hit), world.getAmbientLight().color());
         Material material = hit.object.material();
-        return material.shade(this, hit);
+        return Color.add(result, material.shade(this, hit));
     }
 
     public Color fastshade(World world, Ray ray, int depth){
@@ -96,7 +96,8 @@ public class Raytracer extends JComponent {
         Hit hit = world.raytrace(ray);
         hit.depth = depth + 1;
         if(hit.object == null) return world.getColor();
+        Color result = Color.mul(hit.object.material().ambient(hit), world.getAmbientLight().color());
         Material material = hit.object.material();
-        return material.fastshade(this, hit);
+        return Color.add(result, material.fastshade(this, hit));
     }
 }
