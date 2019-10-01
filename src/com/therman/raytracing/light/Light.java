@@ -26,7 +26,7 @@ public class Light {
         this.radius = radius;
         this.samplers = new Sampler[Raytracer.THREADS];
         for (int i = 0; i < samplers.length; i++) {
-            samplers[i] = radius > 0 ? new Sampler(new Randomized(), new SquareDistributor(), 1024, samples) : null;
+            samplers[i] = radius > 0 ? new Sampler(new Randomized(0), new SquareDistributor(), 1024, samples) : null;
         }
         this.samples = samples;
     }

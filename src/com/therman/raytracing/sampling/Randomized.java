@@ -7,7 +7,15 @@ import java.util.stream.IntStream;
 
 public class Randomized implements SampleGenerator {
 
-    private Random random = new Random();
+    public Randomized(){
+        this.random = new Random();
+    }
+
+    public Randomized(int seed) {
+        this.random = new Random(seed);
+    }
+
+    private Random random;
 
     @Override
     public Vector2[] generate(int count) {

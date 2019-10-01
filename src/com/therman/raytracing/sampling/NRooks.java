@@ -6,7 +6,15 @@ import java.util.Random;
 
 public class NRooks implements SampleGenerator {
 
-    private Random random = new Random();
+    public NRooks(){
+        this.random = new Random();
+    }
+
+    public NRooks(int seed) {
+        this.random = new Random(seed);
+    }
+
+    private Random random;
 
     @Override
     public Vector2[] generate(int count) {

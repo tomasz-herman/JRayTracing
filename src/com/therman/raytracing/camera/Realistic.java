@@ -27,7 +27,7 @@ public class Realistic implements Camera {
         this.focal = focal;
         this.samplers = new Sampler[Raytracer.THREADS];
         for (int i = 0; i < samplers.length; i++) {
-            this.samplers[i] = new Sampler(new Jittered(), new DiskDistributor(), 8, samples);
+            this.samplers[i] = new Sampler(new Jittered(0), new DiskDistributor(), 8, samples);
         }
         this.samples = samples;
     }
