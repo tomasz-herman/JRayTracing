@@ -6,8 +6,6 @@ import com.therman.raytracing.Raytracer;
 import com.therman.raytracing.Window;
 import com.therman.raytracing.World;
 import com.therman.raytracing.camera.Camera;
-import com.therman.raytracing.camera.Orthographic;
-import com.therman.raytracing.camera.Perspective;
 import com.therman.raytracing.camera.Realistic;
 import com.therman.raytracing.light.AmbientLight;
 import com.therman.raytracing.light.Light;
@@ -19,7 +17,7 @@ import com.therman.raytracing.objects.Sphere;
 public class Main {
 
     public static void main(String[] args) {
-        Raytracer raytracer = new Raytracer(new Window("Raytracer", 1280, 720), 4);
+        Raytracer raytracer = new Raytracer(new Window("Raytracer", 1280, 720), 2);
         World world = new World();
         world.add(new Sphere(new Vector3(-4, 0, 0), 2, Materials.GOLD));
         world.add(new Sphere(new Vector3(4, 0, 0), 2, Materials.GLASS));

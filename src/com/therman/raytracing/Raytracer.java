@@ -14,10 +14,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.text.DecimalFormat;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
 import java.util.concurrent.*;
 
 public class Raytracer extends JComponent {
@@ -75,8 +71,10 @@ public class Raytracer extends JComponent {
     public void raytrace(World world, Camera camera, int threads) {
         final int threads_num = Math.min(threads, THREADS);
         prewiev(world, camera);
+        DecimalFormat format = new DecimalFormat("0.00");
         System.out.println("Rendering...");
-        ThreadPoolExecutor executor = (ThreadPoolExecutor)Executors.newFixedThreadPool(threads);
+        ThreadPoolExecutor executor = (ThreadPoolExecutor)Executors.newFixedThreadPool(threads_num);
+        final int[] count = {0};
         for (int i = 0; i < width; i++) {
             executor.submit(new Calculable(i) {
                 @Override
@@ -94,6 +92,10 @@ public class Raytracer extends JComponent {
                             }
                         }
                         pixels[j * width + i] = result.value();
+                    }
+                    synchronized (count){
+                        count[0]++;
+                        System.out.println(format.format((double)(count[0]) / width * 100) + "%");
                     }
                     repaint(i, 0, 1, height);
                     return null;
