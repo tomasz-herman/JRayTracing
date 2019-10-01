@@ -22,14 +22,14 @@ public class Main {
         Raytracer raytracer = new Raytracer(new Window("Raytracer", 1280, 720), 4);
         World world = new World();
         world.add(new Sphere(new Vector3(-4, 0, 0), 2, Materials.GOLD));
-        world.add(new Sphere(new Vector3(4, 0, 0), 2, Materials.STEEL));
+        world.add(new Sphere(new Vector3(4, 0, 0), 2, Materials.GLASS));
         world.add(new Sphere(new Vector3(0, 0, 2.5), 2, Materials.COPPER));
-        world.add(new Plane(new Vector3(0, -2, 0), new Vector3(0,1,0), new ChessBoard(Materials.SOLID_GRAY, Materials.SOLID_WHITE, 4)));
-        world.add(new Light(new Vector3(0, 3.5, 0), Color.WHITE, 1, 16));
-        world.add(new Sphere(new Vector3(0, 3.5, 0), 1, Materials.LIGHT_BULB));
-        world.add(new AmbientLight(Color.BLACK));
+        world.add(new Plane(new Vector3(0, -2, 0), new Vector3(0,1,0), new ChessBoard(Materials.MIRROR, Materials.BLACK_MIRROR, 4)));
+        world.add(new Light(new Vector3(2000, 4000, 4000), Color.WHITE, 500, 16));
+        world.add(new Sphere(new Vector3(2000, 4000, 4000), 500, Materials.LIGHT_BULB));
+        world.add(new AmbientLight(Color.WHITE));
         Camera camera = new Realistic(new Vector3(0, 2, -6), new Vector3(0, 0, 0), new Vector3(0, 1, 0), 1, 16.0 / 9.0, 16, 0.1, 8);
-        raytracer.raytrace(world, camera);
+        raytracer.raytrace(world, camera, 8);
         raytracer.repaint();
         System.out.println("done");
     }

@@ -14,12 +14,12 @@ public class Emissive extends MaterialDecorator {
     }
 
     @Override
-    public Color shade(Raytracer rt, Hit hit) {
-        return color;
+    public Color shade(Raytracer raytracer, Hit hit, int thread) {
+        return Color.add(color, material.shade(raytracer, hit, thread));
     }
 
     @Override
     public Color fastshade(Raytracer raytracer, Hit hit) {
-        return color;
+        return Color.add(color, material.fastshade(raytracer, hit));
     }
 }

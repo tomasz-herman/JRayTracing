@@ -13,7 +13,7 @@ public class Ambient extends Material {
     }
 
     @Override
-    public Color shade(Raytracer rt, Hit hit) {
+    public Color shade(Raytracer raytracer, Hit hit, int thread) {
         return Color.BLACK;
     }
 

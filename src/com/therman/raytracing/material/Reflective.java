@@ -16,12 +16,12 @@ public class Reflective extends MaterialDecorator {
     }
 
     @Override
-    public Color shade(Raytracer rt, Hit hit) {
+    public Color shade(Raytracer raytracer, Hit hit, int thread) {
         Vector3 toCamera = Vector3.reverse(hit.ray.getDirection());
         Vector3 reflection = Vector3.reflect(toCamera, hit.normal);
         Ray reflected = new Ray(hit.point, reflection);
-        Color result = material.shade(rt, hit);
-        result = Color.add(result, Color.mul(rt.shade(hit.world, reflected, hit.depth), color));
+        Color result = material.shade(raytracer, hit, thread);
+        result = Color.add(result, Color.mul(raytracer.shade(hit.world, reflected, hit.depth, thread), color));
         return result;
     }
 

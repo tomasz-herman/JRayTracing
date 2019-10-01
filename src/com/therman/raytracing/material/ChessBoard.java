@@ -17,12 +17,12 @@ public class ChessBoard extends Material {
     }
 
     @Override
-    public Color shade(Raytracer rt, Hit hit) {
+    public Color shade(Raytracer raytracer, Hit hit, int thread) {
         int x = (int)Math.round(hit.point.x * scale);
         int y = (int)Math.round(hit.point.z * scale);
         if(((x ^ y) & 1) == 0){
-            return a.shade(rt, hit);
-        } else return b.shade(rt, hit);
+            return a.shade(raytracer, hit, thread);
+        } else return b.shade(raytracer, hit, thread);
     }
 
     @Override

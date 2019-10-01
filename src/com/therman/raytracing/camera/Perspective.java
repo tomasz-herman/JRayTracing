@@ -19,7 +19,7 @@ public class Perspective implements Camera {
     }
 
     @Override
-    public Ray getRay(double x, double y) {
+    public Ray getRay(double x, double y, int thread) {
         return new Ray(position, view.transform(new Vector3(x * aspect * scale, -y * scale, -1)));
     }
 
@@ -30,6 +30,6 @@ public class Perspective implements Camera {
 
     @Override
     public Ray getPreviewRay(double x, double y) {
-        return getRay(x, y);
+        return getRay(x, y, 0);
     }
 }

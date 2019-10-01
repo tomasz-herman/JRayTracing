@@ -21,7 +21,7 @@ public class Orthographic implements Camera {
     }
 
     @Override
-    public Ray getRay(double x, double y) {
+    public Ray getRay(double x, double y, int thread) {
         Vector3 origin = Vector3.add(position, view.transform(new Vector3(x * scale * aspect, - y * scale, 0)));
         return new Ray(origin, direction);
     }
@@ -33,6 +33,6 @@ public class Orthographic implements Camera {
 
     @Override
     public Ray getPreviewRay(double x, double y) {
-        return getRay(x, y);
+        return getRay(x, y, 0);
     }
 }

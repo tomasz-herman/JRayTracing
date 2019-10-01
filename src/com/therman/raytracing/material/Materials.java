@@ -27,9 +27,17 @@ public class Materials {
 
     public final static Material LIGHT_BULB;
 
+    public final static Material GLASS;
+
     static {
+        Material glass = new Ambient(Color.BLACK);
+        glass = new Refractive(glass, Color.WHITE, 1.5, 0.9);
+        glass = new Specular(glass, Color.WHITE, 20);
+        GLASS = glass;
+
         Material light_bulb = new Ambient(Color.BLACK);
-        light_bulb = new Emissive(light_bulb, Color.WHITE);
+        light_bulb = new Refractive(light_bulb, Color.WHITE, 1.0, 0.5);
+        light_bulb = new Emissive(light_bulb, Color.GRAY);
         LIGHT_BULB = light_bulb;
 
         Material mirror = new Ambient(Color.BLACK);
