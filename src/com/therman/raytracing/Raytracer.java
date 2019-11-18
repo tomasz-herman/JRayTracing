@@ -76,9 +76,9 @@ public class Raytracer extends JComponent {
         ThreadPoolExecutor executor = (ThreadPoolExecutor)Executors.newFixedThreadPool(threads_num);
         final int[] count = {0};
         for (int i = 0; i < width; i++) {
-            executor.submit(new Calculable(i) {
+            executor.submit(new Runner(i) {
                 @Override
-                public Integer call() {
+                public void run() {
                     for (int j = 0; j < height; j++) {
                         int thread = (int) (Thread.currentThread().getId() % threads_num);
                         Color result = Color.BLACK;
@@ -98,21 +98,21 @@ public class Raytracer extends JComponent {
                         System.out.println(format.format((double)(count[0]) / width * 100) + "%");
                     }
                     repaint(i, 0, 1, height);
-                    return null;
                 }
             });
         }
         try {
+            executor.shutdown();
             executor.awaitTermination(Long.MAX_VALUE, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    public static abstract class Calculable implements Callable<Integer> {
+    public static abstract class Runner implements Runnable {
         int i;
-        Calculable(int i) { this.i = i; }
-        public abstract Integer call() throws Exception;
+        Runner(int i) { this.i = i; }
+        public abstract void run();
     }
 
     private void prewiev(World world, Camera camera){
